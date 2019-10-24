@@ -10,6 +10,10 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	private int currSec;
 	private int second;
 	private long milli;
+	private int minute;
+	private int currMin;
+	private int hour;
+	private int currHour;
 	private static final int MILLI_CONVERSION = 1000;
 	
 	// Constructor
@@ -37,15 +41,27 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	void dateTimeNow() {
 		// OUTPUT FORMAT: Current Date/Time: 10/10/2019 06:24 PM
 		
+		// Getting minutes
+		minute = currSec / 60;
+		
+		// Getting current minute
+		currMin = minute % 60;
+		
+		// Getting hour
+		hour = minute / 60;
+		
+		// Getting current hour
+		currHour = hour % 24;
 	}
 
+	// Method causing program to sleep for 5 seconds if currSec is greater then allowedSec
 	@Override
 	void sleepForFiveSec() {
+		
 		try {
 			
 			TimeUnit.SECONDS.sleep(5);
 		} catch (InterruptedException e) {
-			
 			
 			e.printStackTrace();
 		}
