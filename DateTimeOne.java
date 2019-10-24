@@ -1,7 +1,11 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class DateTimeOne extends MesoDateTimeOneAbstract
@@ -10,10 +14,6 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	private int currSec;
 	private int second;
 	private long milli;
-	private int minute;
-	private int currMin;
-	private int hour;
-	private int currHour;
 	private static final int MILLI_CONVERSION = 1000;
 	
 	// Constructor
@@ -23,10 +23,10 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		second = (int) milli / MILLI_CONVERSION;
 	}
 	
-	public DateTimeOne(long input) {
-		
-		milli = input;
-	}
+//	public DateTimeOne(long input) {
+//		
+//		milli = input;
+//	}
 	
 	// Return the current second
 	@Override
@@ -39,19 +39,14 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 
 	@Override
 	void dateTimeNow() {
-		// OUTPUT FORMAT: Current Date/Time: 10/10/2019 06:24 PM
 		
-		// Getting minutes
-		minute = currSec / 60;
+		Date date = new Date();
 		
-		// Getting current minute
-		currMin = minute % 60;
-		
-		// Getting hour
-		hour = minute / 60;
-		
-		// Getting current hour
-		currHour = hour % 24;
+		// Current date and time
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a");  
+		String strDate = formatter.format(date);
+		//TEST//
+		System.out.println("Current Date/Time: " + strDate);
 	}
 
 	// Method causing program to sleep for 5 seconds if currSec is greater then allowedSec
@@ -69,7 +64,33 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 
 	@Override
 	void dateTimeOfOtherCity() {
-		// TODO Auto-generated method stub
+		
+		Date date = new Date();
+		
+		// Time on server
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");  
+		String strServer = formatter.format(date);
+		//TEST//
+		System.out.println("Time on Server: " + strServer);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+		// For GMT time zone
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		//Will print in GMT TEST
+		System.out.println("GMT: " + sdf.format(calendar.getTime()));
+		
+		// For BST time zone
+		sdf.setTimeZone(TimeZone.getTimeZone("BST"));
+		//Will print in GMT TEST
+		System.out.println("BST (90E): " + sdf.format(calendar.getTime()));
+		
+		// For CST time zone
+		sdf.setTimeZone(TimeZone.getTimeZone("CST"));
+		//Will print in GMT TEST
+		System.out.println("CST (90W): " + sdf.format(calendar.getTime()));
 	}
 
 	@Override

@@ -61,9 +61,6 @@ public class Main
 	    dateTimeOne.dateTimeNow();	    
 	    //System.out.println("Time in the major Time Zone: ");	    
 	    
-	    //TEST
-	    System.out.println("The value of Second now: " + vlaueOfSecondNow);
-	    
 	    System.out.println("\nTime at other zones:");
 	    /**
 		 * We have got time for our server but we have some major time zone in the world.
