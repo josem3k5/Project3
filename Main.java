@@ -61,6 +61,8 @@ public class Main
 	    dateTimeOne.dateTimeNow();	    
 	    //System.out.println("Time in the major Time Zone: ");	    
 	    
+	    System.out.println("The value of Second now: " + vlaueOfSecondNow);
+	    
 	    System.out.println("\nTime at other zones:");
 	    /**
 		 * We have got time for our server but we have some major time zone in the world.
@@ -227,7 +229,7 @@ public class Main
 		System.out.println("Stations are: "+ mesoEqual.calAsciiEqual());
 		
 		System.out.println("\nUnsroted Hashmap:");
-		asciiVal=mesoEqual.calAsciiEqual();		
+		//asciiVal=mesoEqual.calAsciiEqual();		
 		for (String stIds : asciiVal.keySet()) 
 		{
 			//System.out.println(stIds + " " + asciiVal.get(stIds));
