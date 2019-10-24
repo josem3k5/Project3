@@ -10,11 +10,16 @@ import java.util.concurrent.TimeUnit;
 
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
+	// hmap of HH:mm
 	private HashMap <String, String> timeZone = new HashMap <String, String>();
+	
+	// hmap of MM/dd/yyyy HH:mm
+	private HashMap <String, String> otherZone = new HashMap <String, String>();
+	
+	private static final int MILLI_CONVERSION = 1000;
 	private int currSec;
 	private int second;
 	private long milli;
-	private static final int MILLI_CONVERSION = 1000;
 	
 	// Constructor
 	public DateTimeOne () {
@@ -62,40 +67,67 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		}
 	}
 
+	// Method to calculate server time and time zones
 	@Override
 	void dateTimeOfOtherCity() {
 		
 		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
 		
 		// Time on server
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");  
 		String strServer = formatter.format(date);
 		//TEST//
 		System.out.println("Time on Server: " + strServer);
 		
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-
 		// For GMT time zone
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		//Will print in GMT TEST
-		System.out.println("GMT: " + sdf.format(calendar.getTime()));
+		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
+		String gmt = formatter.format(date);
+		formatter.setTimeZone(gmtTimeZone);
+		System.out.println("GMT: " + formatter.format(date));
 		
 		// For BST time zone
-		sdf.setTimeZone(TimeZone.getTimeZone("BST"));
-		//Will print in GMT TEST
-		System.out.println("BST (90E): " + sdf.format(calendar.getTime()));
+		TimeZone bstTimeZone = TimeZone.getTimeZone("BST");
+		String bst = formatter.format(date);
+		formatter.setTimeZone(bstTimeZone);
+		System.out.println("BST (90E): " + formatter.format(date));
 		
-		// For CST time zone
-		sdf.setTimeZone(TimeZone.getTimeZone("CST"));
-		//Will print in GMT TEST
-		System.out.println("CST (90W): " + sdf.format(calendar.getTime()));
+		// For BST time zone
+		TimeZone cstTimeZone = TimeZone.getTimeZone("CST");
+		String cmt = formatter.format(date);
+		formatter.setTimeZone(cstTimeZone);
+		System.out.println("CST (90W): " + formatter.format(date));
+		
+		// Putting <String, String> values with assigned keys in timeZone hmap
+		timeZone.put("GMT", gmt);
+		timeZone.put("BST", bst);
+		timeZone.put("CST", cmt);
 	}
 
 	@Override
 	void dateTimeDifferentZone() {
-		// TODO Auto-generated method stub
+		
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		
+		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
+		String gmt = formatter.format(date);
+		formatter.setTimeZone(gmtTimeZone);
+		System.out.println("GMT: " + formatter.format(date));
+		
+		TimeZone bstTimeZone = TimeZone.getTimeZone("BST");
+		String bst = formatter.format(date);
+		formatter.setTimeZone(bstTimeZone);
+		System.out.println("BST: " + formatter.format(date));
+		
+		TimeZone cmtTimeZone = TimeZone.getTimeZone("CST");
+		String cmt = formatter.format(date);
+		formatter.setTimeZone(cmtTimeZone);
+		System.out.println("CST: " + formatter.format(date));
+		
+		// Putting <String, String> values with assigned keys in otherZone hmap
+		otherZone.put("GMT", gmt);
+		otherZone.put("BST", bst);
+		otherZone.put("CST", cmt);	
 	}
 
 	@Override
