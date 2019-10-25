@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -8,6 +7,8 @@ import java.time.Period;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 // Generated
 public class DateTimeTwo {
@@ -135,12 +136,23 @@ public class DateTimeTwo {
 	// Method to print out the hash map
 	public void dateHashMap() {
 		
-		
+		for (Entry <LocalDate, Integer> key : datesFileMap.entrySet()) {
+		    System.out.println(key.getKey() + ":" + key.getValue());
+		}
 	}
 
-
+	// Method to sort the hash map and output in sorted order
 	public void dateHashMapSorted() {
-		// TODO Auto-generated method stub
+		// TreeMap to use for sorting date and time
+		TreeMap <LocalDate, Integer> sorted = new TreeMap<> (datesFileMap);
+
+		// Putting all data from PrintStyle1 into tree
+		sorted.putAll(datesFileMap);
 		
+		// "Now the Hashmap"
+		for (Entry <LocalDate, Integer> key : sorted.entrySet()) {
+		    System.out.println(key.getKey() + ":" + key.getValue());
+		}
 	}
+// end
 }
