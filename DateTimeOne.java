@@ -1,25 +1,23 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.TimeZone;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 public class DateTimeOne extends MesoDateTimeOneAbstract
 {
-	// hmap of HH:mm
-	private HashMap <String, String> timeZone = new HashMap <String, String>();
+	private HashMap <String, String> firstMap = new HashMap <String, String>();
 	
-	// hmap of MM/dd/yyyy HH:mm
-	private HashMap <String, String> otherZone = new HashMap <String, String>();
+	private HashMap <String, String> secondMap = new HashMap <String, String>();
 	
 	private static final int MILLI_CONVERSION = 1000;
 	private int currSec;
 	private int second;
 	private long milli;
+	private LocalDateTime currTime = LocalDateTime.now();
 	
 	// Constructor
 	public DateTimeOne () {
@@ -37,8 +35,8 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	@Override
 	int getValueOfSecond() {
 		
-		currSec = -1 * second % 60;
-		
+		currSec = second % 60;
+		System.out.println("The value of the Second now: " + currSec);
 		return currSec;
 	}
 
@@ -67,101 +65,70 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		}
 	}
 
-	// Method to calculate server time and time zones
+	// Method to calculate server time and time zones in HH:mm and put in hmap
 	@Override
 	void dateTimeOfOtherCity() {
 		
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		
 		// Time on server
-		String strServer = formatter.format(date);
+		String strServer = formatter.format(currTime);
 		//TEST//
 		System.out.println("Time on Server: " + strServer);
 		
 		// For GMT time zone
-		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
-		String gmt = formatter.format(date);
-		formatter.setTimeZone(gmtTimeZone);
-		System.out.println("GMT: " + formatter.format(date));
+		LocalDateTime gmtTime = currTime.plusHours(5);
+		String gmtTimeStr = formatter.format(gmtTime);
+		System.out.println("GMT: " + gmtTimeStr);
 		
 		// For BST time zone
-		TimeZone bstTimeZone = TimeZone.getTimeZone("BST");
-		String bst = formatter.format(date);
-		formatter.setTimeZone(bstTimeZone);
-		System.out.println("BST (90E): " + formatter.format(date));
+		LocalDateTime bstTime = currTime.plusHours(6);
+		String bstTimeStr = formatter.format(bstTime);
+		System.out.println("BST (90E): " + bstTimeStr);
 		
-		// For BST time zone
-		TimeZone cstTimeZone = TimeZone.getTimeZone("CST");
-		String cmt = formatter.format(date);
-		formatter.setTimeZone(cstTimeZone);
-		System.out.println("CST (90W): " + formatter.format(date));
-		
-		// Putting <String, String> values with assigned keys in timeZone hmap
-		timeZone.put("GMT", gmt);
-		timeZone.put("BST", bst);
-		timeZone.put("CST", cmt);
+		// For CST time zone
+		LocalDateTime cstTime = gmtTime.minusHours(5);
+		String cstTimeStr = formatter.format(cstTime);
+		System.out.println("CST (90W): " + cstTimeStr);
 	}
 
+	// Method to calculate server time and time zones in MM/dd/yyyy HH:mm and put in hmap
 	@Override
 	void dateTimeDifferentZone() {
 		
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		
-		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
-		String gmt = formatter.format(date);
-		formatter.setTimeZone(gmtTimeZone);
-		System.out.println("GMT: " + formatter.format(date));
+		// for GMT
+		LocalDateTime gmtTime = currTime.plusHours(5);
+		String gmtTimeStr = formatter.format(gmtTime);
+		System.out.println("GMT: " + gmtTimeStr);
 		
-		TimeZone bstTimeZone = TimeZone.getTimeZone("BST");
-		String bst = formatter.format(date);
-		formatter.setTimeZone(bstTimeZone);
-		System.out.println("BST: " + formatter.format(date));
+		// for BST
+		LocalDateTime bstTime = currTime.plusHours(6);
+		String bstTimeStr = formatter.format(bstTime);
+		System.out.println("BST: " + bstTimeStr); 
 		
-		TimeZone cmtTimeZone = TimeZone.getTimeZone("CST");
-		String cmt = formatter.format(date);
-		formatter.setTimeZone(cmtTimeZone);
-		System.out.println("CST: " + formatter.format(date));
-		
-		// Putting <String, String> values with assigned keys in otherZone hmap
-		otherZone.put("GMT", gmt);
-		otherZone.put("BST", bst);
-		otherZone.put("CST", cmt);	
+		// For CST time zone
+		LocalDateTime cstTime = gmtTime.minusHours(5);
+		String cstTimeStr = formatter.format(cstTime);
+		System.out.println("CST: " + cstTimeStr);
 	}
 
 	@Override
 	void timeZoneHashMap() {
-		// TODO Auto-generated method stub
-	}
-	
-	/*
-	 * Method to read in file (Dates.txt)
-	 */
-	public void readFile() throws IOException {
-
-		// Read file with bufferReader
-		BufferedReader br = new BufferedReader(new FileReader("SortingDates.txt"));
-
-		// String representing current line being read by bufferedReader
-		String currLine;
-
-		// Begin to read every line where information starts (line 7) as long as line != null
-		while((currLine = br.readLine()) != null) {
-
-			// Trim out white space of current line
-			String stationTrimmed = currLine.trim();
-
-			// Adding each station name to ArrayList, STIDnames
-			timeZone.put(currLine,  currLine);
+		
+		String zst = "11/05/2018 10:59";
+		String ast = "10/01/2020 19:59";
+		
+		firstMap.put("ZST", zst);
+		firstMap.put("AST", ast);
+		
+		System.out.println("Print Style 1:");
+		Iterator<String> itr = firstMap.keySet().iterator();
+		while (itr.hasNext()) {
+			System.out.println(itr.next());
 		}
-		// Close reader
-		br.close();
+		
 	}
-   
-   
-   
-   
-   
 // end 
 }
