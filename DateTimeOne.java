@@ -37,11 +37,6 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		second = (int) milli / MILLI_CONVERSION;
 	}
 	
-//	public DateTimeOne(long input) {
-//		
-//		milli = input;
-//	}
-	
 	// Return the current second
 	@Override
 	int getValueOfSecond() {

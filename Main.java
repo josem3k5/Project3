@@ -227,7 +227,7 @@ public class Main
 		System.out.println("Stations are: "+ mesoEqual.calAsciiEqual());
 		
 		System.out.println("\nUnsroted Hashmap:");
-		// COMMENTED OUT ***** asciiVal=mesoEqual.calAsciiEqual();		
+		asciiVal=mesoEqual.calAsciiEqual();		
 		for (String stIds : asciiVal.keySet()) 
 		{
 			//System.out.println(stIds + " " + asciiVal.get(stIds));
