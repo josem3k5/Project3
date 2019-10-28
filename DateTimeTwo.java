@@ -19,6 +19,9 @@ public class DateTimeTwo {
 	// HashMap that will contain all the dates from Dates.txt
 	private HashMap <LocalDate, Integer> datesFileMap = new HashMap <LocalDate, Integer>();
 	
+	// Treemap that will hold the corrected sorted values
+	private TreeMap <LocalDate, Integer> sortedMap = new TreeMap<> (datesFileMap);
+	
 	// Constructor
 	public DateTimeTwo() {
 		
@@ -90,9 +93,12 @@ public class DateTimeTwo {
 		// Putting dates into datesFileMap hashMap
 		while((currLine = br.readLine()) != null) {
 			
+			// Increment the iterator
+			i++;
+			
 			LocalDate currDate = LocalDate.parse(currLine, dateFormat);
 				
-			datesFileMap.put(currDate, i++);
+			datesFileMap.put(currDate, i);
 		}
 		
 		// Close reader (finished reading file)
@@ -136,22 +142,22 @@ public class DateTimeTwo {
 	// Method to print out the hash map
 	public void dateHashMap() {
 		
-		for (Entry <LocalDate, Integer> key : datesFileMap.entrySet()) {
-		    System.out.println(key.getKey() + ":" + key.getValue());
+		for (LocalDate currentKey: datesFileMap.keySet()) {
+			
+			System.out.println(currentKey + ":" + datesFileMap.get(currentKey));
 		}
 	}
 
 	// Method to sort the hash map and output in sorted order
 	public void dateHashMapSorted() {
-		// TreeMap to use for sorting date and time
-		TreeMap <LocalDate, Integer> sorted = new TreeMap<> (datesFileMap);
-
-		// Putting all data from PrintStyle1 into tree
-		sorted.putAll(datesFileMap);
+		
+		// Store hashmap values into tree map
+		sortedMap = new TreeMap<>(datesFileMap);
 		
 		// "Now the Hashmap"
-		for (Entry <LocalDate, Integer> key : sorted.entrySet()) {
-		    System.out.println(key.getKey() + ":" + key.getValue());
+		for (LocalDate key: sortedMap.keySet()) {
+			
+		    System.out.println(key + ":" + sortedMap.get(key));
 		}
 	}
 // end

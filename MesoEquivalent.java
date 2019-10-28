@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -13,8 +13,6 @@ public class MesoEquivalent {
 	
 	private HashMap<String, Integer> stationsAndValueMap = new HashMap<String, Integer>();
 	
-	private String output;
-	
 	// String representing the station being passed in by the user
 	private String station;
 	
@@ -25,15 +23,11 @@ public class MesoEquivalent {
 	private int ascii;
 	
 	// Average value from MesoAsciiCal class
-	int newAvg = MesoAsciiCal.newAvg;
+	int totalAvg = MesoAsciiCal.totalAvg;
 	
 	// Constructor
-	public MesoEquivalent(String stId) {
+	public MesoEquivalent(String stId) throws IOException {
 		this.station = stId;
-	}
-	
-	// Method that reads in Mesonet.txt and calculates the average ASCII value
-	public HashMap<String, Integer> calAsciiEqual() throws IOException {
 		
 		// Read file with bufferReader
 		BufferedReader br = new BufferedReader(new FileReader("Mesonet.txt"));
@@ -45,7 +39,7 @@ public class MesoEquivalent {
 		currLine = br.readLine();
 		currLine = br.readLine();
 		currLine = br.readLine();
-
+				
 		// Begin to read every line where information starts (line 7) as long as line != null
 		while((currLine = br.readLine()) != null) {
 
@@ -57,7 +51,7 @@ public class MesoEquivalent {
 
 			// Trim out white space of current line
 			String stationTrimmed = currLine.trim();
-			
+
 			currStation = stationTrimmed.substring(startChar, endChar);
 
 			// Adding each station name to ArrayList, STIDnames
@@ -65,7 +59,11 @@ public class MesoEquivalent {
 		}
 		// Close br
 		br.close();
-		
+	}
+	
+	// Method that reads in Mesonet.txt and calculates the average ASCII value
+	public HashMap<String, Integer> calAsciiEqual(){
+
 		// Calculate the ASCII value for every station in the hashmap
 		for (Entry <String, Integer> key : stationsMap.entrySet()) {
 			
@@ -95,7 +93,7 @@ public class MesoEquivalent {
 			ascii = (int) Math.round(tempAvg);
 			
 			// Checking if the current station's ASCII value is the same as the average ASCII value calculated from MesoAsciiCal
-			if(ascii == newAvg) {
+			if(ascii == totalAvg) {
 				
 				stationsAndValueMap.put(key.getKey(), ascii);
 			}

@@ -20,7 +20,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	
 	private static final int MILLI_CONVERSION = 1000;
 	private int currSec;
-	private int second;
+	private LocalDateTime second;
 	private long milli;
 	private LocalDateTime currTime = LocalDateTime.now();
 	LocalDateTime gmtTime;
@@ -34,14 +34,15 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	public DateTimeOne () {
 		
 		milli = System.currentTimeMillis();
-		second = (int) milli / MILLI_CONVERSION;
+		
+		second = LocalDateTime.now();
 	}
 	
 	// Return the current second
 	@Override
 	int getValueOfSecond() {
 		
-		currSec = second % 60;
+		currSec = second.getSecond();
 		System.out.println("The value of the Second now: " + currSec);
 		return currSec;
 	}
