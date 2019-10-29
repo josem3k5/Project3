@@ -18,26 +18,33 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	
 	private HashMap <String, String> secondMap = new HashMap <String, String>();
 	
-	private static final int MILLI_CONVERSION = 1000;
-	
+	// int representing the current second of user
 	private int currSec;
 	
+	// LocalDateTime representing the second
 	private LocalDateTime second;
 	
 	private long milli;
 	
+	// LocalDateTime representing the current/ now time of the computer
 	private LocalDateTime currTime = LocalDateTime.now();
 	
+	// LocalDateTime to hold the gmt time
 	LocalDateTime gmtTime;
 	
+	// LocalDateTime to hold the bst time
 	LocalDateTime bstTime;
 	
+	// LocalDateTime to hold the cst time
 	LocalDateTime cstTime;
 	
+	// String representing the gmt time in String
 	String gmtTimeStr;
 	
+	// String representing the bst time in String
 	String bstTimeStr;
 	
+	// String representing the cst time in String
 	String cstTimeStr;
 	
 	// Constructor
@@ -57,6 +64,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		return currSec;
 	}
 
+	// Method that grabs the current time of the computer and puts in the SimpleDateFormat format
 	@Override
 	void dateTimeNow() {
 		
