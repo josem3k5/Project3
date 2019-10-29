@@ -19,15 +19,25 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	private HashMap <String, String> secondMap = new HashMap <String, String>();
 	
 	private static final int MILLI_CONVERSION = 1000;
+	
 	private int currSec;
+	
 	private LocalDateTime second;
+	
 	private long milli;
+	
 	private LocalDateTime currTime = LocalDateTime.now();
+	
 	LocalDateTime gmtTime;
+	
 	LocalDateTime bstTime;
+	
 	LocalDateTime cstTime;
+	
 	String gmtTimeStr;
+	
 	String bstTimeStr;
+	
 	String cstTimeStr;
 	
 	// Constructor
