@@ -52,10 +52,13 @@ public class DateSortingUsingAlgorithm {
 	
 	public void dateHashMapSortedDescending() {
 		
+		// Iterator to help pass through local array
 		int iterator = 0;
 		
+		// Array used to store in keys
 		LocalDate[] local = new LocalDate[algoMap.size()];
 		
+		// Loop
 		for (LocalDate key: algoMap.keySet()) {
 			
 			local[iterator] = key;
@@ -63,16 +66,22 @@ public class DateSortingUsingAlgorithm {
 			iterator++;
 		}
 		
+		// Loop to go through LocalDate[] local array
 		for (int i = 1; i < local.length; i++) {
 			
+			// Store current value in entry variable of LocalDate
 			LocalDate entry = local[i];
 			
+			// Decrement current value by 1 and store in int variable k
 			int k = i -1;
 			
+			// While k > -1 & is before the entry, store k in local[k + 1] index
 			while ((k > -1) && (local[k].isBefore(entry))) {
 				
+				// Storing in local index
 				local[k + 1] = local[k];
 				
+				// Decrement k
 				k--;
 			}
 			local[k + 1] = entry;
