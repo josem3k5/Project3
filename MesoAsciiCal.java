@@ -38,14 +38,10 @@ public class MesoAsciiCal extends MesoAsciiAbstract
 		for(int i = 0; i < 4; i++) {
 
 			array[i] = (double) userStation.charAt(i);
-//			// Grab the current char of userStation
-//			asciiValue  = (int) userStation.toString().charAt(i);
-//
-//			// Getting the total ASCII value for the station name
-//			charValueTotal += asciiValue;
 		}
 		
-		asciiAvg = (array[0] + array[1] + array[2] + array[3]) / 4.0;
+		// Calculating the ASCII value for selected station
+		asciiAvg = (array[0] + array[1] + array[2] + array[3]) / stationLength;
 		
 		asciiValue = (int) Math.round(asciiAvg);
 		
@@ -54,34 +50,6 @@ public class MesoAsciiCal extends MesoAsciiAbstract
 		totalAvg = anotherAverage;
 		
 		return anotherAverage;
-		// Calculate the average value for the station name
-		//double tempAvg = (charValueTotal / division);
-		
-		// Assigning the value after correctly rounding up or down to newAvg
-		//double newAvg = (charValueTotal / division);
-		
-//		int f =  (int) Math.floor(((charValueTotal / stationLength) + 79) / 2);
-//		int c =  (int) Math.ceil(((charValueTotal / stationLength) + 79) / 2);
-//
-//		charValueTotal /= 4;
-//		charValueTotal += 79;
-//		charValueTotal /= 2.0;
-//		
-//
-//		if((charValueTotal - f) >= 0.25) {
-//			
-//			charValueTotal = c;
-//			
-//			totalAvg = (int) charValueTotal;
-//			
-//		} else if ((charValueTotal - f) < 0.25) {
-//			
-//			charValueTotal = f;
-//			totalAvg = (int) charValueTotal;
-//		}
-		
-		
-		//return (int) charValueTotal;
 	}
 }
 
