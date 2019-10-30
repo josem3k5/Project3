@@ -96,8 +96,10 @@ public class DateTimeTwo {
 			// Increment the iterator
 			i++;
 			
+			// Parsing current line into the format we need it in
 			LocalDate currDate = LocalDate.parse(currLine, dateFormat);
 				
+			// Placing those formatted lines in our HashMap
 			datesFileMap.put(currDate, i);
 		}
 		
