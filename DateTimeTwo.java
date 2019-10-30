@@ -144,8 +144,10 @@ public class DateTimeTwo {
 	// Method to print out the hash map
 	public void dateHashMap() {
 		
+		// Loop through hashmap and acquire the key
 		for (LocalDate currentKey: datesFileMap.keySet()) {
 			
+			// Print in format it wants
 			System.out.println(currentKey + ":" + datesFileMap.get(currentKey));
 		}
 	}
@@ -159,6 +161,7 @@ public class DateTimeTwo {
 		// "Now the Hashmap"
 		for (LocalDate key: sortedMap.keySet()) {
 			
+			// Print in format it wants
 		    System.out.println(key + ":" + sortedMap.get(key));
 		}
 	}
