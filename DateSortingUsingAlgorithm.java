@@ -9,9 +9,14 @@ import java.util.HashMap;
 // Generating
 public class DateSortingUsingAlgorithm {
 
+	// HashMap to hold the dates of type LocalDate
 	private HashMap <LocalDate, Integer> algoMap;
+	
 	private LocalDate unsortedTo;
+	
+	// Formatter to be used later in code
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
 	private int value;
 	
 	public DateSortingUsingAlgorithm() throws IOException {
